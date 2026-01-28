@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'screens/lista_recetas_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
-  runApp(const RecetasApp());
+  runApp(const RecetarioApp());
 }
 
-class RecetasApp extends StatelessWidget {
-  const RecetasApp({super.key});
+class RecetarioApp extends StatelessWidget {
+  const RecetarioApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Recetas de Cocina',
-      home: const ListaRecetasScreen(),
+      title: 'Recetario',
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      home: const MainScreen(),
     );
   }
 }

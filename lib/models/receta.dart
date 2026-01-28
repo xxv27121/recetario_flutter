@@ -1,14 +1,15 @@
 class Receta {
-  int id;
-  String nombre;
-  String tipo; // postre, carne, ensalada...
-  String ingredientes;
-  String pasos; // instrucciones de elaboracion
+  final int id;
+  final String nombre;
+  final String tipo;
+  final String ingredientes; // texto multilinea
+  final String pasos;         // texto multilinea con secciones
+  final String foto;
 
-  bool guardada;      // el usuario la guarda en su recetario
-  bool elaborada;     // ya la ha hecho
-  String notas;       // notas del usuario
-  int? puntuacion;    // null = no ha votado, 1–5 = votada
+  bool guardada;
+  bool elaborada;
+  String notas;
+  int? puntuacion;
 
   Receta({
     required this.id,
@@ -16,6 +17,7 @@ class Receta {
     required this.tipo,
     required this.ingredientes,
     required this.pasos,
+    required this.foto,
     this.guardada = false,
     this.elaborada = false,
     this.notas = '',

@@ -4,26 +4,33 @@ import 'detalle_receta_screen.dart';
 import 'tipos_screen.dart';
 import '../widgets/background_scaffold.dart';
 
-class ListaRecetasScreen extends StatefulWidget {
-  const ListaRecetasScreen({super.key});
+class RecetarioScreen extends StatefulWidget {
+  const RecetarioScreen({super.key});
 
   @override
-  State<ListaRecetasScreen> createState() => _ListaRecetasScreenState();
+  State<RecetarioScreen> createState() => _RecetarioScreenState();
 }
 
-class _ListaRecetasScreenState extends State<ListaRecetasScreen> {
+class _RecetarioScreenState extends State<RecetarioScreen> {
   String? tipoSeleccionado;
 
   @override
   Widget build(BuildContext context) {
-    final tipos = recetasPrueba.map((r) => r.tipo).toSet().toList();
+    final guardadas = recetasPrueba.where((r) => r.guardada).toList();
+    final tipos = guardadas.map((r) => r.tipo).toSet().toList();
     final recetas = tipoSeleccionado == null
         ? []
-        : recetasPrueba.where((r) => r.tipo == tipoSeleccionado).toList();
+        : guardadas.where((r) => r.tipo == tipoSeleccionado).toList();
+
+    if (guardadas.isEmpty) {
+      return const Scaffold(
+        body: Center(child: Text('No has guardado ninguna receta')),
+      );
+    }
 
     if (tipoSeleccionado == null) {
       return BackgroundScaffold(
-        title: 'Tipos de recetas',
+        title: 'Mi recetario',
         child: TiposScreen(
           tipos: tipos,
           onTipoSeleccionado: (tipo) {
@@ -57,27 +64,15 @@ class _ListaRecetasScreenState extends State<ListaRecetasScreen> {
               ),
               title: Text(receta.nombre),
               subtitle: Text(receta.tipo),
-              trailing: IconButton(
-                icon: Icon(
-                  receta.guardada
-                      ? Icons.bookmark
-                      : Icons.bookmark_border,
-                ),
-                onPressed: () {
-                  setState(() {
-                    receta.guardada = !receta.guardada;
-                  });
-                },
-              ),
-              onTap: () async {
-                await Navigator.push(
+              trailing: const Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
                         DetalleRecetaScreen(receta: receta),
                   ),
                 );
-                setState(() {});
               },
             ),
           );
