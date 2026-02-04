@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/receta.dart';
 import '../widgets/background_scaffold.dart';
+import '../services/persistencia_service.dart';
+import '../services/recetas_prueba.dart';
 
+/// Pantalla que muestra la receta
 class DetalleRecetaScreen extends StatefulWidget {
   final Receta receta;
 
@@ -14,9 +17,6 @@ class DetalleRecetaScreen extends StatefulWidget {
 class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
   final TextEditingController _notasController = TextEditingController();
 
-  // =========================
-  // PARSER DE SECCIONES (reutilizable)
-  // =========================
   List<_SeccionTexto> _parseSecciones(String texto) {
     final lines = texto.trim().split('\n');
 
@@ -36,11 +36,18 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
       } else {
         actual ??= _SeccionTexto(titulo: null, lineas: []);
         actual.lineas.add(line);
-        if (!secciones.contains(actual)) secciones.add(actual);
+        if (!secciones.contains(actual)) {
+          secciones.add(actual);
+        }
       }
     }
 
     return secciones;
+  }
+
+  /// La vaina de la persistencia
+  void _guardarEstado() {
+    PersistenciaService.guardarEstado(recetasPrueba);
   }
 
   @override
@@ -56,6 +63,7 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
       child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // Imagen principal
           SizedBox(
             height: 250,
             child: Image.asset(
@@ -66,6 +74,7 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
 
           const SizedBox(height: 16),
 
+          // Tipo de receta
           Text(
             receta.tipo,
             style: const TextStyle(
@@ -77,7 +86,29 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
 
           const SizedBox(height: 10),
 
-          // ⭐ PUNTUACIÓN
+          // Guardar / quitar del recetario
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(
+                  receta.guardada ? Icons.bookmark : Icons.bookmark_border,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    receta.guardada = !receta.guardada;
+                  });
+                  _guardarEstado();
+                },
+              ),
+              const Text(
+                'Guardar en recetario',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+
+          // Puntuación de la receta
           Text(
             'Puntuación',
             style: Theme.of(context)
@@ -100,6 +131,7 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
                   setState(() {
                     receta.puntuacion = estrella;
                   });
+                  _guardarEstado();
                 },
               );
             }),
@@ -107,9 +139,7 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
 
           const SizedBox(height: 20),
 
-          // =========================
-          // INGREDIENTES (CON SECCIONES)
-          // =========================
+          // Ingredientes
           Text(
             'Ingredientes',
             style: Theme.of(context)
@@ -146,9 +176,7 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
 
           const SizedBox(height: 24),
 
-          // =========================
-          // PASOS (CON SECCIONES + NUMERACIÓN)
-          // =========================
+          // Pasos de preparación
           Text(
             'Preparación',
             style: Theme.of(context)
@@ -187,9 +215,7 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
 
           const SizedBox(height: 30),
 
-          // =========================
-          // NOTAS DEL USUARIO
-          // =========================
+          // Notas
           Text(
             'Notas del usuario',
             style: Theme.of(context)
@@ -202,15 +228,18 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
             maxLines: 3,
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
-              enabledBorder:
-                  OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-              focusedBorder:
-                  OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               hintText: 'Escribe tus notas aquí...',
               hintStyle: TextStyle(color: Colors.white70),
             ),
             onChanged: (value) {
               receta.notas = value;
+              _guardarEstado();
             },
           ),
         ],

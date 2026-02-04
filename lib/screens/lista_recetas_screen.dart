@@ -1,51 +1,38 @@
 import 'package:flutter/material.dart';
-import '../services/recetas_prueba.dart';
-import 'detalle_receta_screen.dart';
-import 'tipos_screen.dart';
+import '../models/receta.dart';
+import '../screens/detalle_receta_screen.dart';
 import '../widgets/background_scaffold.dart';
 
+/// Pantalla que muestra la lista de recetas de un tipo
 class ListaRecetasScreen extends StatefulWidget {
-  const ListaRecetasScreen({super.key});
+  final String tipo;
+  final List<Receta> recetas;
+
+  const ListaRecetasScreen({
+    super.key,
+    required this.tipo,
+    required this.recetas,
+  });
 
   @override
   State<ListaRecetasScreen> createState() => _ListaRecetasScreenState();
 }
 
 class _ListaRecetasScreenState extends State<ListaRecetasScreen> {
-  String? tipoSeleccionado;
-
   @override
   Widget build(BuildContext context) {
-    final tipos = recetasPrueba.map((r) => r.tipo).toSet().toList();
-    final recetas = tipoSeleccionado == null
-        ? []
-        : recetasPrueba.where((r) => r.tipo == tipoSeleccionado).toList();
-
-    if (tipoSeleccionado == null) {
-      return BackgroundScaffold(
-        title: 'Tipos de recetas',
-        child: TiposScreen(
-          tipos: tipos,
-          onTipoSeleccionado: (tipo) {
-            setState(() {
-              tipoSeleccionado = tipo;
-            });
-          },
-        ),
-      );
-    }
-
     return BackgroundScaffold(
-      title: tipoSeleccionado!,
+      title: widget.tipo,
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: recetas.length,
+        itemCount: widget.recetas.length,
         itemBuilder: (context, index) {
-          final receta = recetas[index];
+          final receta = widget.recetas[index];
 
           return Card(
             margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
+              // Imagen de la receta
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
@@ -55,8 +42,12 @@ class _ListaRecetasScreenState extends State<ListaRecetasScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
+
+              // Información básica
               title: Text(receta.nombre),
               subtitle: Text(receta.tipo),
+
+              // Botón para guardar o quitar del recetario
               trailing: IconButton(
                 icon: Icon(
                   receta.guardada
@@ -69,15 +60,18 @@ class _ListaRecetasScreenState extends State<ListaRecetasScreen> {
                   });
                 },
               ),
-              onTap: () async {
-                await Navigator.push(
+
+              // Acceso al detalle de la receta
+              onTap: () {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
                         DetalleRecetaScreen(receta: receta),
                   ),
-                );
-                setState(() {});
+                ).then((_) {
+                  setState(() {});
+                });
               },
             ),
           );

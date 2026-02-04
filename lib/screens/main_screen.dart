@@ -15,7 +15,10 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    ListaRecetasScreen(),
+    ListaRecetasScreen(
+      tipo: 'Todas',
+      recetas: [],
+    ),
     RecetarioScreen(),
   ];
 

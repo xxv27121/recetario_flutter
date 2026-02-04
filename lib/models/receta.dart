@@ -1,11 +1,13 @@
+/// Atributos de cada receta
 class Receta {
   final int id;
   final String nombre;
   final String tipo;
-  final String ingredientes; // texto multilinea
-  final String pasos;         // texto multilinea con secciones
+  final String ingredientes;
+  final String pasos;
   final String foto;
 
+  // Datos que puede manipular el usuario
   bool guardada;
   bool elaborada;
   String notas;
