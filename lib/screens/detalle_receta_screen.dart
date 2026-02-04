@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/receta.dart';
 import '../widgets/background_scaffold.dart';
 import '../services/persistencia_service.dart';
-import '../services/recetas_prueba.dart';
 
 /// Pantalla que muestra la receta
 class DetalleRecetaScreen extends StatefulWidget {
@@ -16,6 +15,12 @@ class DetalleRecetaScreen extends StatefulWidget {
 
 class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
   final TextEditingController _notasController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _notasController.text = widget.receta.notas;
+  }
 
   List<_SeccionTexto> _parseSecciones(String texto) {
     final lines = texto.trim().split('\n');
@@ -47,13 +52,12 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
 
   /// La vaina de la persistencia
   void _guardarEstado() {
-    PersistenciaService.guardarEstado(recetasPrueba);
+    PersistenciaService.guardarReceta(widget.receta);
   }
 
   @override
   Widget build(BuildContext context) {
     final receta = widget.receta;
-    _notasController.text = receta.notas;
 
     final ingredientesSecciones = _parseSecciones(receta.ingredientes);
     final pasosSecciones = _parseSecciones(receta.pasos);
@@ -107,6 +111,28 @@ class _DetalleRecetaScreenState extends State<DetalleRecetaScreen> {
               ),
             ],
           ),
+
+          // Marcar como elaborada
+          Row(
+            children: [
+              Checkbox(
+                value: receta.elaborada,
+                activeColor: Colors.white,
+                checkColor: Colors.black,
+                onChanged: (value) {
+                  setState(() {
+                    receta.elaborada = value ?? false;
+                  });
+                  _guardarEstado();
+                },
+              ),
+              const Text(
+                'Receta elaborada',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+
 
           // Puntuación de la receta
           Text(

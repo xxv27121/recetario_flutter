@@ -1,10 +1,11 @@
+///Lista de recetas
 import '../models/receta.dart';
 
 List<Receta> recetasPrueba = [
   Receta(
     id: 1,
     nombre: 'Tortilla de patatas',
-    tipo: 'Plato principal',
+    tipo: 'Tortillas',
     ingredientes: '''
 Patatas
 Huevos
@@ -264,4 +265,229 @@ Colocar sobre el arroz antes de servir
 ''',
     foto: 'assets/images/arrozConBacalaoYAlcachofas.jpg',
   ),
+
+  Receta(
+    id: 9,
+    nombre: 'Arroz con costra al horno',
+    tipo: 'Arroz',
+    ingredientes: '''
+320g de arroz
+700ml de caldo de cocido o de pollo
+500g de pollo en trozos
+100g de garbanzos cocidos y escurridos
+250g entre longaniza blanca y roja
+250g entre butifarra blanca y negra
+1 tomante
+5 huevos
+Perejil
+Aceite de oliva
+Sal
+''',
+    pasos: '''
+Cortamos la butifarra en rodajas y la longaniza en trozos de bocado.
+Pon una paellera a fuego medio con un poco de aceite de oliva, cuando esté caliente añade la longaniza y sal.
+Deja que se dore y retira de la pellera.
+Repite el proceso con la butifarra.
+Repite el proceso con el pollo pero no lo retires.
+Retira el exceso de grasa y deja el equivalente a 2 o 3 cucharadas.
+Ralla el tomate y añádelo al pollo, mezcla y deja que se cocine 5 minutos.
+Incorpora los garbnzos, el arroz, las butifarras y las longanizas, mezcla dos minutos.
+Vierte el caldo caliente y deja cocer 12 minutos a baja temperatura.
+Precalienta el horno a 220ºC.
+Bate los huevos con una pizca de sal y perejil picado.
+Vierte el huevo por encima cuando hayan pasado los 12 minutos.
+Mete la paellera en el horno y déjala 10 minutos.
+Retira del horno y deja reposar 5 minutos tapada con un paño o papel de aluminio.
+''',
+    foto: 'assets/images/arrozConCostra.jpg',
+),
+
+ Receta(
+    id: 10,
+    nombre: 'Ensaladilla Rusa',
+    tipo: 'Ensalada',
+    ingredientes: '''
+1Kg de patatas
+3 Zanahorias grandes
+1 Chorro de vinagre
+3 Huevos
+150g de guisantes
+100g de aceitunas
+300g de mahonesa
+1 pimiento sado
+Sal
+Opcional (anchoas, atún)
+''',
+    pasos: '''
+[Cocer verduras]
+Lavar patatas y zanahorias.
+Poner en una olla grande con abundnte agua, sal y un chorro de vinagre.
+Cocer a fuego medio hasta que esten tiernas, unos 25 minutos.
+
+[Cocer los huevos]
+Sumergir en agua hirviendo.
+Cocer durante 10 minutos.
+Retirar y enfriar con agua fria, pelar y reservar.
+
+[Guisantes (Solo si son Crudos o congelados)]
+Cocer en agua con sal durante 5 minutos.
+Escurrir y reservar.
+
+[Cortar los ingredientes]
+Una vez que todo ha enfriado:
+Pelamos las patatas y zanahorias.
+Las cortamos en dados pequños.
+Picamos dos de los huevos cocidos y las aceitunas.
+
+[Pasos finales]
+Mezclamos los ingredientes picados en un bol grande y añadimos opcionalmente atún o anchoas.
+Añadimos sal y mahonesa poco a poco.
+Cubrimos el bol con film transparente y dejamos reposar en nevera dos horas.
+Decoramos con el huevo duro restante en rodajas y el pimiento en tiras.
+''',
+    foto: 'assets/images/ensaladillaRusa.jpg',
+  ),
+
+Receta(
+    id: 11,
+    nombre: 'Ensalada de pepino',
+    tipo: 'Ensalada',
+    ingredientes: '''
+2 Pepinos medianos
+3 Cucharadas de aceite de oliva
+1 Cucharada de vinagre de manzana o el jugo de medio limón
+1 Diente de ajo picado o rallado (opcional)
+Sal y pimienta al gusto
+Hierbas frescas como menta o perejil (opcional)
+1 Taza de yogurt natural (opcional)
+''',
+    pasos: '''
+Lavar bien los pepinos y, opcionalmente, pelarlos.
+Cortarlos en rodjas finas o en tiras.
+En un bol, mezclar el aceite, el vinagre o limon, el ajo, el yogurt si se usa, sal y pimienta.
+Agregar los pepinos, mezclar bien y dejar reposar unos minutos en el refrigerador.
+Decorar con hierbas frescas antes de servir.
+''',
+    foto: 'assets/images/ensaladaDePepino.jpg',
+    ),
+
+Receta(
+    id: 12,
+    nombre: 'Crema de calabaza',
+    tipo: 'Cremas',
+    ingredientes: '''
+500g de calabaza
+3 Calabacines medianos
+4 Zanahorias
+1 Diente de ajo picado
+700ml de Caldo
+Aceite de oliva
+1 Cucharada de mantequilla
+Pimienta
+Nuez moscada
+Pimentón dulce o picaante para decorar
+''',
+    pasos: '''
+Lavamos y cortamos las verduras en trozos medianos.
+En una sartén grande ponemos 4 cucharadas de aceite de oliva y calentamos.
+Añadimos el ajo picado y cuando dore añadimos las verduras, nuez moscada, sal y pimienta.
+Ponemos fuego alto hasta que las verduras suelten agua y reduzcan.
+Cuando las verduras cojan color las pasamos a la olla express.
+Añadimos el caldo, cerramos la olla y mantenemos a fuego medio 12 minutos.
+Abrimos la olla (con cuidado), añadimos la mantequilla y batimos.
+Correjimos de sal, decoramos con pimentón y servimos.
+''',
+    foto: 'assets/images/CremaDeCalabaza.jpg',
+    ),
+
+Receta(
+    id: 13,
+    nombre: 'Crema de espárragos blancos',
+    tipo: 'Cremas',
+    ingredientes: '''
+1 Bote de espárragos grandes
+1 Huevo duro
+Sal
+Pimienta
+2 Cucharadas de aceite de oliva
+Nueces
+''',
+    pasos: '''
+Pelar el huevo duro y reservar en el vaso de la batidora.
+Añadir sal, el aceite, los espárragos con su caaldo y un poco de pimienta.
+Batimos
+Podemos servir frío o clentar en el microhondas.
+Despues de servir añadimos nueces picadas.
+''',
+    foto: 'assets/images/cremaDeEsparragos.jpg',
+),
+
+Receta(
+    id: 14,
+    nombre: 'Muhammara (crema siria de pimientos y nueces)',
+    tipo: 'Cremas',
+    ingredientes: '''
+Pimiento asado
+Ajo sin el germen
+Comino
+Limón
+Miel
+Aceitunas
+Ajo y perejil picado(decoración)
+''',
+    pasos: '''
+Echamos en un vaso de batidora todos los ingredientes excepto aceitunas y picada de ajo y perejil.
+Batímos hasta conseguir la textura deseada.
+Dejamos unas horas en la nevera para que espese.
+Decoramos con aceitunas y la picada de ajo y perejil.
+''',
+    foto: 'assets/images/Muhammara.jpg',
+),
+
+Receta(
+    id: 15,
+    nombre: 'Manzanas asadas',
+    tipo: 'Postre',
+    ingredientes: '''
+8 Manzanas medianas o 4 grandes
+Trocitos de mantequilla
+Azúcar y cel molida
+''',
+    pasos: '''
+Lavamos y descorazonamos las manzanas.
+Las colocamos en una fuente para horno.
+Sobre cada manzana ponemos un trozo pequeño de mantequilla.
+espolvoremos azúcar y canela.
+Hornemos a 180ºC.
+Al emplatar podemos añadir un poco de nata montada.
+''',
+    foto: 'assets/images/manzanasAsadas.jpg',
+),
+
+Receta(
+    id: 16,
+    nombre: 'Natillas',
+    tipo: 'Postre',
+    ingredientes: '''
+4 Huevos
+2 Cucharadas soperas de maicena
+3 Cucharadas de azúcar
+Medio litro de leche
+1 Cucharadita de aroma de vainilla
+1 Cucharadita de canela
+6 Cucharaditas de Caramelo líquido
+''',
+    pasos: '''
+Separar claras y yemas, poner las yemas en un bol.
+Mezclar las yemas con la maicena, canela, azúcar, vainilla y un vaso de leche.
+Batir la mezla.
+Calentar el resto de la leche.
+Cuando la leche esté tibia echar la mezcla y remover con una varilla enérgicmente.
+Remover a fuego medio durante 10 minutos o hasta que espese, reservar.
+Verter caramelo en el fondo de los recipientes y rellenar con la mezcla.
+Dejar enfriar y pasar a la nevera.
+Se puede decorar con galleta triturada antes de servir.
+''',
+    foto: 'assets/images/natillas.jpg',
+),
 ];

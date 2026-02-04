@@ -22,7 +22,7 @@ class BackgroundScaffold extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Colors.white, // 👈 AQUÍ
+                  color: Colors.white,
                 ),
               ),
               iconTheme: const IconThemeData(color: Colors.white),

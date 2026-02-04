@@ -1,8 +1,9 @@
+///Lista de tipos
 import '../models/tipo_receta.dart';
 
 const List<TipoReceta> tiposReceta = [
   TipoReceta(
-    nombre: 'Plato principal',
+    nombre: 'Plato Principal',
     imagen: 'assets/images/tipo_plato.jpg',
   ),
   TipoReceta(
@@ -14,11 +15,19 @@ const List<TipoReceta> tiposReceta = [
     imagen: 'assets/images/tipo_postre.jpg',
   ),
   TipoReceta(
-    nombre: 'Crema',
+    nombre: 'Cremas',
     imagen: 'assets/images/tipo_crema.jpg',
   ),
   TipoReceta(
-    nombre: 'plato principal',
-    imagen: 'assets/images/tipo_plato.jpg',
+    nombre: 'Arroces',
+    imagen: 'assets/images/tipo_arroces.jpg',
+  ),
+  TipoReceta(
+    nombre: 'Pasta',
+    imagen: 'assets/images/tipo_pasta.jpg',
+  ),
+  TipoReceta(
+    nombre: 'Tortillas',
+    imagen: 'assets/images/tipo_tortillas.jpg',
   ),
 ];

@@ -1,111 +1,88 @@
 import 'package:flutter/material.dart';
 import '../services/recetas_prueba.dart';
-import '../screens/detalle_receta_screen.dart';
-import '../screens/tipos_screen.dart';
+import 'lista_recetas_screen.dart';
 import '../widgets/background_scaffold.dart';
 
-/// Pantalla que muestra el recetario personal del usuario.
-class RecetarioScreen extends StatefulWidget {
+class RecetarioScreen extends StatelessWidget {
   const RecetarioScreen({super.key});
 
   @override
-  State<RecetarioScreen> createState() => _RecetarioScreenState();
-}
-
-class _RecetarioScreenState extends State<RecetarioScreen> {
-  /// Tipo de receta seleccionado
-  String? tipoSeleccionado;
-
-  @override
   Widget build(BuildContext context) {
-    // Lista de recetas guardadas
     final recetasGuardadas =
         recetasPrueba.where((r) => r.guardada).toList();
 
-    // Tipos de las recetas guardadas
+    if (recetasGuardadas.isEmpty) {
+      return const BackgroundScaffold(
+        title: 'Mi recetario',
+        child: Center(
+          child: Text(
+            'No has guardado ninguna receta',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+    }
+
     final tipos =
         recetasGuardadas.map((r) => r.tipo).toSet().toList();
 
-    // Recetas filtradas por tipo
-    final recetasFiltradas = tipoSeleccionado == null
-        ? []
-        : recetasGuardadas
-            .where((r) => r.tipo == tipoSeleccionado)
-            .toList();
+    final Map<String, String> imagenesTipos = {
+      'Plato principal': 'assets/images/tipo_plato.jpg',
+      'Pasta': 'assets/images/tipo_pasta.jpg',
+      'Postre': 'assets/images/tipo_postre.jpg',
+      'Ensalada': 'assets/images/tipo_ensalada.jpg',
+    };
 
-    // No hay recetas guardadas!!!
-    if (recetasGuardadas.isEmpty) {
-      return const Scaffold(
-        body: Center(
-          child: Text('No has guardado ninguna receta'),
-        ),
-      );
-    }
-
-    // Vista de tipos
-    if (tipoSeleccionado == null) {
-      return BackgroundScaffold(
-        title: 'Mi recetario',
-        child: TiposScreen(
-          tipos: tipos,
-          onTipoSeleccionado: (tipo) {
-            setState(() {
-              tipoSeleccionado = tipo;
-            });
-          },
-        ),
-      );
-    }
-
-    // Vista de recetas de un tipo
     return BackgroundScaffold(
-      title: tipoSeleccionado!,
+      title: 'Mi recetario',
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: recetasFiltradas.length,
+        itemCount: tipos.length,
         itemBuilder: (context, index) {
-          final receta = recetasFiltradas[index];
+          final tipo = tipos[index];
+          final recetasDelTipo =
+              recetasGuardadas.where((r) => r.tipo == tipo).toList();
 
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              // Imagen de la receta
-              leading: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  receta.foto,
-                  width: 60,
-                  height: 60,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListaRecetasScreen(
+                    tipo: tipo,
+                    recetas: recetasDelTipo,
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              height: 140,
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: AssetImage(
+                    imagenesTipos[tipo] ?? 'assets/images/tipo_plato.jpg',
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),
-
-              // Información básica
-              title: Text(receta.nombre),
-              subtitle: Text(receta.tipo),
-
-              // Quitar la receta del recetario
-              trailing: IconButton(
-                icon: const Icon(Icons.bookmark),
-                onPressed: () {
-                  setState(() {
-                    receta.guardada = false;
-                  });
-                },
-              ),
-
-              // Detalle de la receta
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        DetalleRecetaScreen(receta: receta),
+              alignment: Alignment.center,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                color: Colors.black54,
+                child: Text(
+                  tipo,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                ).then((_) {
-                  setState(() {});
-                });
-              },
+                ),
+              ),
             ),
           );
         },

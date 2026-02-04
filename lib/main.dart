@@ -6,8 +6,7 @@ import 'services/persistencia_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Cargar datos antes de arrancar la app
-  await PersistenciaService.cargarEstado(recetasPrueba);
+  await PersistenciaService.cargarDatos(recetasPrueba);
 
   runApp(const MyApp());
 }

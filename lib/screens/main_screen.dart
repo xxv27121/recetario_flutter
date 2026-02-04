@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
-import 'lista_recetas_screen.dart';
+import 'tipos_screen.dart';
 import 'recetario_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,14 +13,17 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _index = 0;
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    ListaRecetasScreen(
-      tipo: 'Todas',
-      recetas: [],
-    ),
-    RecetarioScreen(),
-  ];
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = const [
+      HomeScreen(),
+      TiposScreen(),
+      RecetarioScreen(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+/// Dato de cada tipo
 class TipoReceta {
   final String nombre;
   final String imagen;
