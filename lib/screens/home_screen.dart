@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Selección de tres recetas como sugerencias
-    final idsSugerencias = [2, 5, 9];
+    final idsSugerencias = [2, 11, 9];
 
     final sugerencias = recetasPrueba
         .where((r) => idsSugerencias.contains(r.id))

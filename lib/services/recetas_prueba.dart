@@ -139,7 +139,7 @@ Unta un recipiente apto para horno con aceite de oliva
 Rellenaa cada canelón y colócalo en el recipiente, Cúbrelos todos con la bechamel y extiende el queso rallado
 Hornea durante 10 minutos
 ''',
-    foto: 'assets/images/canelonesDePollo.jpg',
+    foto: 'assets/images/CanelonesDePollo.jpg',
   ),
 
   Receta(
